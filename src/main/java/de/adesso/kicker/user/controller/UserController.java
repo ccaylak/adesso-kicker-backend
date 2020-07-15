@@ -31,6 +31,11 @@ public class UserController {
         return userService.getLoggedInUser();
     }
 
+    @GetMapping("/all")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
     @GetMapping("/statistics/{id}")
     public List<TrackedStatistic> getTrackedStatistics(@PathVariable String id) {
         var user = userService.getUserById(id);
