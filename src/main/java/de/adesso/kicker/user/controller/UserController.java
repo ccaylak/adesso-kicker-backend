@@ -47,8 +47,13 @@ public class UserController {
         return userService.getUserPageSortedByRating(pageable.getPageNumber(), pageable.getPageSize());
     }
 
+    @GetMapping("/mail/notification")
+    public boolean getEmailNotifications() {
+        return userService.getEmailNotifications();
+    }
+
     @GetMapping("/mail/toggle")
-    public void toggleMail() {
-        userService.changeEmailNotifications();
+    public void toggleEmailNotifications() {
+        userService.toggleEmailNotifications();
     }
 }

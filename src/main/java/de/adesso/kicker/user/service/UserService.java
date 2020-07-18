@@ -41,7 +41,7 @@ public class UserService {
     }
 
     public List<User> getUsersSortedByRating(int page, int size) {
-         var pageable = PageRequest.of(page, size, Sort.by("statistic.rating").descending());
+        var pageable = PageRequest.of(page, size, Sort.by("statistic.rating").descending());
         return userRepository.findAllByStatisticNotNull(pageable).getContent();
     }
 
@@ -102,14 +102,14 @@ public class UserService {
         statisticsService.deleteAll();
     }
 
-    public void changeEmailNotifications() {
+    public void toggleEmailNotifications() {
         var user = getLoggedInUser();
-        if (user.isEmailNotifications()) {
-            user.setEmailNotifications(false);
-        } else {
-            user.setEmailNotifications(true);
-        }
+        user.setEmailNotifications(!user.isEmailNotifications());
         saveUser(user);
+    }
+
+    public boolean getEmailNotifications() {
+        return getLoggedInUser().isEmailNotifications();
     }
 
     private void saveAllUsers(Iterable<User> users) {
