@@ -1,6 +1,9 @@
 package de.adesso.kicker.user.controller;
 
+import de.adesso.kicker.user.persistence.Statistic;
+import de.adesso.kicker.user.persistence.StatisticRepository;
 import de.adesso.kicker.user.persistence.User;
+import de.adesso.kicker.user.persistence.UserRepository;
 import de.adesso.kicker.user.service.UserService;
 import de.adesso.kicker.user.trackedstatistic.persistence.TrackedStatistic;
 import de.adesso.kicker.user.trackedstatistic.service.TrackedStatisticService;
@@ -16,6 +19,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/users")
 public class UserController {
+    //Remove
+    private final UserRepository userRepository;
+    private final StatisticRepository statisticRepository;
+    //above
 
     private final UserService userService;
 
@@ -55,5 +62,35 @@ public class UserController {
     @GetMapping("/mail/toggle")
     public void toggleEmailNotifications() {
         userService.toggleEmailNotifications();
+    }
+
+    //TODO: Remove
+    @GetMapping("/test/user")
+    public void createTestUser() {
+        User user1 = new User("test1", "Peter", "Schmalöer", "peter@online.de");
+        User user2 = new User("test2", "Daniel", "Meier", "Daniel.Meier@adesso.de");
+        User user3 = new User("test3", "Frederik", "Schlemmer", "Frederik.Schlemmer@adesso.de");
+        userRepository.save(user1);
+        userRepository.save(user2);
+        userRepository.save(user3);
+    }
+
+    @GetMapping("/test/statistic")
+    public void createTestStatistics() {
+        Statistic statistic = new Statistic();
+        statisticRepository.save(statistic);
+    }
+
+    @GetMapping("test/setstats")
+    public void setStats() {
+        User user1 = userRepository.findById("test1").get();
+        user1.setStatistic(statisticRepository.findById("1").get());
+        userRepository.save(user1);
+        User user2 = userRepository.findById("test2").get();
+        user2.setStatistic(statisticRepository.findById("2").get());
+        userRepository.save(user2);
+        User user3 = userRepository.findById("test3").get();
+        user3.setStatistic(statisticRepository.findById("3").get());
+        userRepository.save(user3);
     }
 }
