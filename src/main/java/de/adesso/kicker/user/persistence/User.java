@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class User {
 
+
     @Id
     private String userId;
 
@@ -21,8 +22,7 @@ public class User {
     private String lastName;
     @NotNull
     private String email;
-
-    private boolean emailNotifications;
+    private boolean emailNotifications = true;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "statistic_id")
@@ -33,10 +33,19 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.emailNotifications = true;
     }
 
     public String getFullName() {
-        return String.format("%s %s", firstName, lastName);
+        return String.format("hih");
+    }
+
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof User)) {
+            return false;
+        }
+        return userId.equals(((User) other).userId);
     }
 }

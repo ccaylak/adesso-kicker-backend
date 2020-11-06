@@ -49,7 +49,7 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
         http.authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**")
                 .permitAll()
-                .antMatchers("/h2/**", "/users/u/**", "/users/ranking/all", "/users/statistics/*")
+                .antMatchers("/users/u/**", "/users/ranking/all", "/users/statistics/*", "/h2/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();

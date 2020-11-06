@@ -29,17 +29,6 @@ public class Statistic {
         this.losses = 0;
     }
 
-    public int getWinRatio() {
-        if (losses == 0) {
-            return 100;
-        }
-        return Math.round(100 - (100f / getPlayedMatches() * losses));
-    }
-
-    public long getPlayedMatches() {
-        return wins + losses;
-    }
-
     public void increaseWins() {
         this.wins += 1;
     }

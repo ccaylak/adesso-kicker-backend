@@ -30,7 +30,7 @@ public class TrackedStatistic {
     @ManyToOne
     private User user;
 
-    private LocalDate date;
+    private LocalDate date = LocalDate.now();
 
     public TrackedStatistic(Integer rank, Integer rating, Long wins, Long losses, User user) {
         this.rank = rank;
@@ -38,6 +38,5 @@ public class TrackedStatistic {
         this.wins = wins;
         this.losses = losses;
         this.user = user;
-        this.date = LocalDate.now();
     }
 }

@@ -38,6 +38,7 @@ public class MatchService {
 
     @Transactional
     public void addMatchEntry(Match match) {
+        System.out.println(match);
         checkForFutureDate(match);
         checkSamePlayer(match);
         checkCurrentUser(match);
@@ -94,6 +95,7 @@ public class MatchService {
     }
 
     private void checkCurrentUser(Match match) {
+        System.out.println("Logged User: " +userService.getLoggedInUser());
         if (!match.getTeamAPlayer1().equals(userService.getLoggedInUser())) {
             throw new InvalidCreatorException();
         }
@@ -120,8 +122,8 @@ public class MatchService {
     }
 
     private boolean checkSamePlayer2InBothTeams(Match match) {
-        return (Objects.equals(match.getTeamAPlayer2(), match.getTeamBPlayer2())
-                && (match.getTeamBPlayer2() != null || match.getTeamAPlayer2() != null));
+        return ((match.getTeamBPlayer2() != null && match.getTeamAPlayer2() != null))
+                && Objects.equals(match.getTeamAPlayer2(), match.getTeamBPlayer2());
     }
 
     public List<Match> getAllVerifiedMatches() {

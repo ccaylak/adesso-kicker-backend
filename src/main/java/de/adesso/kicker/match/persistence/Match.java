@@ -1,6 +1,5 @@
 package de.adesso.kicker.match.persistence;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import de.adesso.kicker.user.persistence.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,34 +25,28 @@ public class Match {
 
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @JsonProperty("_date")
     private LocalDate date;
 
     @NotNull
     @OneToOne
-    @JsonProperty("_playerA1")
     private User teamAPlayer1;
 
     @Nullable
     @OneToOne
-    @JsonProperty("_playerA2")
     private User teamAPlayer2;
 
     @NotNull
     @OneToOne
-    @JsonProperty("_playerB1")
     private User teamBPlayer1;
 
     @Nullable
     @OneToOne
-    @JsonProperty("_playerB2")
     private User teamBPlayer2;
 
     @NotNull
-    @JsonProperty("_winnerTeamA")
     private Boolean winnerTeamA;
 
-    private boolean verified;
+    private boolean verified = false;
 
     public Match(LocalDate date, User teamAPlayer1, User teamAPlayer2, User teamBPlayer1, User teamBPlayer2,
             Boolean winnerTeamA) {
@@ -63,7 +56,6 @@ public class Match {
         this.teamBPlayer1 = teamBPlayer1;
         this.teamBPlayer2 = teamBPlayer2;
         this.winnerTeamA = winnerTeamA;
-        this.verified = false;
     }
 
     public Match(LocalDate date, User teamAPlayer1, User teamBPlayer1, Boolean winnerTeamA) {
@@ -73,7 +65,6 @@ public class Match {
         this.teamBPlayer1 = teamBPlayer1;
         this.teamBPlayer2 = null;
         this.winnerTeamA = winnerTeamA;
-        this.verified = false;
     }
 
     public List<User> getPlayers() {
